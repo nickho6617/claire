@@ -1,7 +1,7 @@
 import streamlit as st
 import smtplib
 import re
-import os
+import os,ssl
 from email.mime.text import MIMEText
 from datetime import datetime
 
@@ -18,10 +18,12 @@ def send_email(name, phone, email):
     msg['Subject'] = subject
     msg['From'] = sender_email
     msg['To'] = recipient_email
+
+    # Create a secure SSL context
+    context = ssl.create_default_context()
     
     try:
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
+        with smtplib.SMTP_SSL(smtp_server, smtp_port,context=context) as server:
             server.login(sender_email, sender_password)
             server.sendmail(sender_email, recipient_email, msg.as_string())
         return True
