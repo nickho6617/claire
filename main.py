@@ -32,6 +32,12 @@ def send_email(name, phone, email):
         return False
 
 def registration_form_with_indemnity():
+    # Set page configuration with favicon
+    st.set_page_config(page_title="JBay Project Volunteer Registration", page_icon="🛢")
+    
+    # Display logo image
+    st.image("logo.jpeg", width=200)
+
     st.title("Volunteer Registration Form")
     
     # Capture Name, Phone Number, and Email
